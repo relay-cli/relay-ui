@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest a focused improvement to a shared component.
+body:
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Describe the terminal tool and what it currently has to draw by hand.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This component would be useful to more than one Relay tool.
+          required: true

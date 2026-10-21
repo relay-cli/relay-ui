@@ -1,0 +1,23 @@
+name: Bug report
+description: Report reproducible Relay UI behavior.
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the smallest component, props, and terminal width that reproduces the issue.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Relay UI version, Node.js version, terminal, and operating system.
+    validations:
+      required: true
