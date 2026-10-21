@@ -20,3 +20,15 @@ export {
   type SpinnerState,
   type SpinnerStyle,
 } from './spinner/index.js';
+export {
+  Table,
+  cellText,
+  fit,
+  layoutColumns,
+  truncate,
+  visibleRange,
+  type Align,
+  type Column,
+  type TableProps,
+  type Truncate,
+} from './table/index.js';
