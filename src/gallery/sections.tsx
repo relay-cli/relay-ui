@@ -1,0 +1,4 @@
+import type {GallerySection} from './Gallery.js';
+
+/** One section per component, in the order the gallery shows them. */
+export const gallerySections: readonly GallerySection[] = [];

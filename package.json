@@ -1,0 +1,80 @@
+{
+  "name": "@relay-cli/ui",
+  "version": "0.1.0",
+  "description": "Shared Ink components for Relay terminal tools: theming, spinners, tables, and Markdown.",
+  "license": "MIT",
+  "type": "module",
+  "private": false,
+  "keywords": [
+    "cli",
+    "components",
+    "ink",
+    "markdown",
+    "react",
+    "spinner",
+    "table",
+    "terminal-ui",
+    "theme"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/relay-cli/relay-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/relay-cli/relay-ui/issues"
+  },
+  "homepage": "https://github.com/relay-cli/relay-ui#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "overrides": {
+    "esbuild": "0.28.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "relay-ui": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "demo": "tsx src/cli.tsx",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build"
+  },
+  "peerDependencies": {
+    "ink": "^7.1.1",
+    "react": "^19.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "eslint": "^10.11.0",
+    "ink": "^7.1.1",
+    "ink-testing-library": "^4.0.0",
+    "prettier": "^3.9.9",
+    "react": "^19.3.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.2"
+  }
+}
