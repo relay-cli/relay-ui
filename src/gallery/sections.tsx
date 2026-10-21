@@ -1,4 +1,5 @@
 import {Box} from 'ink';
+import {Markdown} from '../markdown/index.js';
 import {Spinner} from '../spinner/index.js';
 import {Table, type Column} from '../table/index.js';
 import {Swatches, useTheme} from '../theme/index.js';
@@ -17,6 +18,27 @@ const sampleRequests: SampleRequest[] = [
   {method: 'GET', path: '/api/orders/unknown', status: 404, ms: 1.1},
   {method: 'PUT', path: '/api/settings', status: 500, ms: 212.4},
 ];
+
+const sampleMarkdown = [
+  '## Deploy checklist',
+  '',
+  'Run **all** checks before tagging. See [the guide](https://github.com/relay-cli/relay-ui#readme).',
+  '',
+  '1. Run `npm run check`',
+  '2. Update the *changelog*',
+  '3. ~~Email the team~~ Post in the channel',
+  '',
+  '> Releases go out from `main` only.',
+  '',
+  '| Package | Size | Status |',
+  '| ------- | ---: | :----: |',
+  '| cards   | 48 KB | ready |',
+  '| chat    | 112 KB | review |',
+  '',
+  '```sh',
+  'npm run release',
+  '```',
+].join('\n');
 
 const RequestTable = ({width}: {width: number}) => {
   const theme = useTheme();
@@ -51,4 +73,8 @@ export const gallerySections: readonly GallerySection[] = [
     ),
   },
   {title: 'Table', render: ({width}) => <RequestTable width={Math.min(width, 64)} />},
+  {
+    title: 'Markdown',
+    render: ({width}) => <Markdown source={sampleMarkdown} width={Math.min(width, 64)} />,
+  },
 ];

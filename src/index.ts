@@ -32,3 +32,15 @@ export {
   type TableProps,
   type Truncate,
 } from './table/index.js';
+export {
+  CodeBlock,
+  InlineText,
+  Markdown,
+  parseInline,
+  parseMarkdownBlocks,
+  type CodeBlockProps,
+  type InlineTextProps,
+  type InlineToken,
+  type MarkdownBlock,
+  type MarkdownProps,
+} from './markdown/index.js';
