@@ -10,7 +10,18 @@ const tsx = fileURLToPath(new URL('../node_modules/tsx/dist/cli.mjs', import.met
 
 describe('CLI options', () => {
   it('reads the snapshot flag', () => {
-    expect(parseCliOptions(['--snapshot'])).toEqual({help: false, version: false, snapshot: true});
+    expect(parseCliOptions(['--snapshot'])).toEqual({
+      help: false,
+      version: false,
+      snapshot: true,
+      theme: 'relay',
+    });
+  });
+
+  it('reads a theme name in either form', () => {
+    expect(parseCliOptions(['--theme', 'mono']).theme).toBe('mono');
+    expect(parseCliOptions(['--theme=mono']).theme).toBe('mono');
+    expect(() => parseCliOptions(['--theme'])).toThrow('needs a theme name');
   });
 
   it('rejects unknown options', () => {
@@ -22,6 +33,23 @@ describe('relay-ui command', () => {
   it('prints the gallery once without a terminal', async () => {
     const {stdout} = await run(process.execPath, [tsx, cli, '--snapshot']);
     expect(stdout).toContain('Relay UI');
+  }, 30_000);
+
+  it('shows the gallery in the theme it is given', async () => {
+    const {stdout} = await run(process.execPath, [tsx, cli, '--snapshot', '--theme', 'mono']);
+    expect(stdout).toContain('mono theme');
+  }, 30_000);
+
+  it('exits with usage on an unknown theme', async () => {
+    const failure: unknown = await run(process.execPath, [
+      tsx,
+      cli,
+      '--snapshot',
+      '--theme',
+      'neon',
+    ]).catch((error: unknown) => error);
+    expect(failure).toMatchObject({code: 2});
+    expect((failure as {stderr: string}).stderr).toContain('Unknown theme "neon"');
   }, 30_000);
 
   it('exits with usage on an unknown option', async () => {
