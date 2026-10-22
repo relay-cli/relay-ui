@@ -97,3 +97,18 @@ Columns start as wide as their widest cell. When the table is wider than `width`
 | `color`      | `(row) => color` for one cell, such as a status code             |
 
 The layout helpers are exported too: `layoutColumns(columns, rows, width, gap?)`, `fit(text, width, align?, truncate?)`, `truncate(text, width, mode?)`, and `visibleRange(count, maxRows, selectedIndex)`.
+
+## Markdown
+
+```tsx
+<Markdown source={reply} width={columns - 4} />
+```
+
+`Markdown` renders headings, paragraphs, ordered and unordered lists, quotes, fenced code, pipe tables (drawn with `Table`), and rules, with bold, italics, strikethrough, inline code, and links inside any of them. An unclosed code fence runs to the end, so a reply that is still streaming shows its code as code. HTML, images, and nested lists are shown as text.
+
+| Prop     | Default   | Meaning                                                                                         |
+| -------- | --------- | ----------------------------------------------------------------------------------------------- |
+| `source` | required  | Markdown text                                                                                   |
+| `width`  | container | Columns to fill; text wraps and code boxes stretch to it. Rules and tables assume 80 without it |
+
+The pieces are exported for tools that render Markdown their own way: `InlineText` (one run of inline Markdown), `CodeBlock`, `parseMarkdownBlocks(source)`, and `parseInline(source)`, with the `MarkdownBlock` and `InlineToken` types.
