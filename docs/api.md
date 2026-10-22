@@ -41,3 +41,19 @@ import {ThemeProvider, resolveTheme} from '@relay-cli/ui';
 | `surfaceRaised` | Selected rows, raised panels                 |
 | `surface`       | Panels and cards                             |
 | `background`    | The screen, for tools that paint one         |
+
+## Spinner
+
+```tsx
+<Spinner label="Thinking…" />
+<Spinner label="Build" state={failed ? 'failed' : finished ? 'done' : 'running'} />
+```
+
+| Prop    | Default        | Meaning                                                          |
+| ------- | -------------- | ---------------------------------------------------------------- |
+| `label` |                | Text after the spinner                                           |
+| `type`  | `'dots'`       | `'dots'`, `'line'`, `'pulse'`, or `{frames, interval}`           |
+| `state` | `'running'`    | `'done'` shows ✓ and `'failed'` shows ✗; both stop the animation |
+| `color` | theme `accent` | Color of the spinner                                             |
+
+`useSpinnerFrame(style, active?)` returns the current frame for tools that draw the spinner inside their own text. In `renderToString` and other single-frame renders the spinner shows its first frame.
