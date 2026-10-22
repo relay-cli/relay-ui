@@ -57,3 +57,43 @@ import {ThemeProvider, resolveTheme} from '@relay-cli/ui';
 | `color` | theme `accent` | Color of the spinner                                             |
 
 `useSpinnerFrame(style, active?)` returns the current frame for tools that draw the spinner inside their own text. In `renderToString` and other single-frame renders the spinner shows its first frame.
+
+## Table
+
+```tsx
+const columns: Column<Request>[] = [
+  {key: 'method', header: 'Method'},
+  {key: 'path', header: 'Path', truncate: 'middle'},
+  {key: 'status', header: 'Status', align: 'right', color: (row) => statusColor(row.status)},
+  {key: 'ms', header: 'Time', align: 'right', value: (row) => `${row.ms.toFixed(1)} ms`},
+];
+
+<Table columns={columns} rows={requests} width={columnsAvailable} selectedIndex={cursor} />;
+```
+
+Columns start as wide as their widest cell. When the table is wider than `width`, the widest columns shrink first, down to `minWidth` (the header width, at most 8), and cut text with `…`. Widths count East Asian wide characters and emoji as two columns.
+
+| Prop            | Default              | Meaning                                                     |
+| --------------- | -------------------- | ----------------------------------------------------------- |
+| `columns`       | required             | Column definitions, below                                   |
+| `rows`          | required             | Any objects                                                 |
+| `width`         | `80`                 | The widest the table may be                                 |
+| `selectedIndex` |                      | Highlight one row in the focus color                        |
+| `maxRows`       | all                  | Show a window of rows around the selection, with ↑/↓ counts |
+| `rule`          | `true`               | Draw a rule under the header                                |
+| `emptyText`     | `'Nothing to show.'` | Shown when there are no rows                                |
+| `gap`           | `2`                  | Spaces between columns                                      |
+| `rowKey`        | row position         | Stable React keys                                           |
+
+| Column field | Meaning                                                          |
+| ------------ | ---------------------------------------------------------------- |
+| `key`        | Identifies the column; also the row property shown by default    |
+| `header`     | Header text                                                      |
+| `value`      | `(row) => string` for computed or formatted cells                |
+| `width`      | A fixed width that never shrinks                                 |
+| `minWidth`   | The narrowest a shrinking column may get                         |
+| `align`      | `'left'`, `'right'` or `'center'`                                |
+| `truncate`   | `'end'` (default) or `'middle'`, which keeps both ends of a path |
+| `color`      | `(row) => color` for one cell, such as a status code             |
+
+The layout helpers are exported too: `layoutColumns(columns, rows, width, gap?)`, `fit(text, width, align?, truncate?)`, `truncate(text, width, mode?)`, and `visibleRange(count, maxRows, selectedIndex)`.
